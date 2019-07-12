@@ -20,7 +20,7 @@ WebhookSimple
 
 
 
-A simple framework/cli tool to setup and sync (Webex Teams) API webhooks
+A simple framework/CLI tool to setup and sync (Webex Teams) API webhooks
 
 
 * Free software: MIT license
@@ -30,19 +30,19 @@ A simple framework/cli tool to setup and sync (Webex Teams) API webhooks
 Features
 --------
 
-* Create, update and delete (webex teams) webhooks from a yaml file
+* Create, update and delete (Webex Teams) webhooks from a YAML file
 * Modular architecture makes it suitable for other APIs as well
 
 How to Use
 ----------
 
-WebhookSimple is a simple (and open source) python framework/command line tool that allows you to quickly describe your desired Webex Teams web hooks and then creates or synchronises them for you.
+WebhookSimple is a simple (and open-source) python framework/command line tool that allows you to quickly describe your desired Webex Teams webhooks and then create or synchronise them for you.
 
-WebhookSimple requires two files from you. *vars.yml* and *hooks.yml*
+WebhookSimple requires two files from you: *vars.yml* and *hooks.yml*
 
-*vars.yml* specifies the different variables while *hooks.yml* lets you specify the web hooks itself.
+*vars.yml* specifies the different variables, while *hooks.yml* lets you specify the webhooks themselves.
 
-A web hook always looks like this  (in *hooks.yml*)
+A webhook always looks like this (in *hooks.yml*)
 
 .. code-block:: yaml
 
@@ -53,7 +53,7 @@ A web hook always looks like this  (in *hooks.yml*)
        event: "created"
        target_url: "https://your_url_here"
 
-Make sure that the ``name`` of your web hook is always unique since this is what webhookSimple will use to identify and synchronise your webhooks.  Your ::vars.yml:: **must include**  an *adapter* that specifies the kind of api we are interacting with as well as the authentication details. Leave this to the provided ``parser.WebexTeamsWebhookManager`` for now and add the access token in the correct spot.
+Make sure that the ``name`` of your webhook is always unique since this is what webhookSimple will use to identify and synchronise your webhooks.  Your ::vars.yml:: **must include**  an *adapter* that specifies the kind of API we are interacting with, as well as the authentication details. Leave this to the provided ``parser.WebexTeamsWebhookManager`` for now and add the access token in the correct spot.
 
 *vars.yml*:
 
@@ -82,7 +82,7 @@ You can now ``setup``\ , ``purge``\ , ``list``\ , ``export`` or ``sync``\  your 
 * ``list``\ will list all webhooks currently registered
 * ``export`` will save all your currently active webhooks to a .yml file
 
-Invoke the module by running
+Invoke the module by running:
 
 .. code-block:: bash
 
@@ -93,7 +93,7 @@ Invoke the module by running
 Taking it one step further
 --------------------------
 
-Setting up web hook from a command line and based of a configuration file is already pretty cool and convenient. But what if we have ten webhooks and need to update the target_url on all of them? We’d have to manually edit all the web hook entries in ::hooks.yml::. This is where the ::vars.yml:: file comes into play. ::hooks.yml:: is not a simple configuration file but rather a `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ template of a configuration file. What you can do is this:
+Setting up a webhook from the command line, and based on a configuration file, is already pretty cool and convenient. But what if we have ten webhooks, and need to update the target_url on all of them? We’d have to manually edit all the webhook entries in ::hooks.yml::. This is where the ::vars.yml:: file comes into play. ::hooks.yml:: is not a simple configuration file but rather a `Jinja2 <http://jinja.pocoo.org/docs/2.10/>`_ template of a configuration file. What you can do is this:
 
 *vars.yml*
 
@@ -114,14 +114,14 @@ Setting up web hook from a command line and based of a configuration file is alr
        event: "created"
        target_url: "https://{{ url_prefix }}/messages"
 
-But this is not all. Those that worked with jinja2 before probably already know what is coming next. You can also add some (generator) logic here. Lets say we want to create a debug and a production version of our web hook. We can do this by doing the following:
+But this is not all. Those that worked with [jinja2](http://jinja.pocoo.org/) before probably already know what is coming next. You can also add some (generator) logic here. Let's say we want to create two versions (_debug_ and _production_) of our webhook. We can do this by configuring the following:
 
 *vars.yml*:
 
 .. code-block:: yaml
 
    ---
-   # Note: Adapter part (see above) omited for bravity
+   # Note: Adapter part (see above) omited for brevity
    envs:
      - name: production
        url: https://my_production_prefix
@@ -141,7 +141,7 @@ But this is not all. Those that worked with jinja2 before probably already know 
        target_url: {{ env.url }}/messages
      {% endfor %}
 
-Or you want to setup the same web hook for different urls. This would look something like this
+Or if you want to setup the same webhook for different URLs, it would look like this:
 
 *vars.yml*:
 
@@ -167,13 +167,13 @@ Or you want to setup the same web hook for different urls. This would look somet
        target_url: {{ url }}
      {% endfor %}
 
-Happy programming! You can get WebhookSimple by running
+Happy programming! You can get WebhookSimple by running:
 
 .. code-block:: bash
 
    $ pip3 install webhooksimple
 
-You have questions or found a bug? Feel free to hit me up on twitter `@squ4rks <https://twitter.com/squ4rks>`_.
+Do you have questions or found a bug? Feel free to hit me up on twitter `@squ4rks <https://twitter.com/squ4rks>`_.
 
 Credits
 -------
