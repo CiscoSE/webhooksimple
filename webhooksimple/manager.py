@@ -3,28 +3,73 @@ from abc import ABC, abstractmethod
 from .models import Webhook
 
 class WebhookManager(ABC):
+    """Abstract parent class for all webhook manager
+
+    A webhook manager provides the functionality to create, update, delete and
+    check a webhook with the API. The WebhookManager class does not provide any
+    functionality as such but rather serves as a template for concrete
+    implementations such as the WebexTeamsWebhookManager
+    """
+
     def __init__(self, authentication, parameters):
+        """Create a new WebhookManager
+
+        Parent constructor that saves the authentication section and any
+        additional parameters from the vars.yaml file.
+
+        Attributes:
+            authentication (dict): A dict containing any authentication
+                information. Note that the format is not specified since some
+                APIs might need a token while others use username/password.
+            parameters (dict): Additional parameters specified in vars.yml
+        """
         self.authentication = authentication
         self.parameters = parameters
 
     @abstractmethod
     def create(self, webhook):
+        """Create a new webhook from the model
+
+        Attributes:
+            webhook (models.Webhook): The new webhook that is to be created
+        """
         pass
 
     @abstractmethod
     def delete(self, webhook):
+        """Delete the provided webhook.
+
+        Attributes:
+            webhook (models.Webhook): The webhook that should be deleted
+        """
         pass
 
     @abstractmethod
     def update(self, webhook):
+        """Update the provided webhook.
+
+        Attributes:
+            webhook (models.Webhook): The webhook that should be updated
+        """
         pass
 
     @abstractmethod
     def list(self):
+        """List all webhooks currently registered online.
+
+        Returns:
+            list(models.Webhook): A list of webhook objects representing the
+                currently online registered webhooks.
+        """
         pass
 
     @abstractmethod
     def is_registered(self, webhook):
+        """Check if a webhook is already registered online.
+
+        Returns:
+            boolean: True if the webhook exists online, False otherwise
+        """
         pass
 
 
