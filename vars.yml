@@ -1,0 +1,11 @@
+# vars file. The adapter section **needs** to be here
+adapter:
+  name: WebexTeamsWebhookManager
+  authentication:
+    access_token: # add your webex teams access token here
+  parameters:
+
+# Add your variables from here
+urls:
+  - https://www.cisco.com
+  - https://www.google.com
