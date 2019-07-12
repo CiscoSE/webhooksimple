@@ -173,6 +173,7 @@ Happy programming! You can get WebhookSimple by running
 
    $ pip3 install webhooksimple
 
+You have questions or found a bug? Feel free to hit me up on twitter `@squ4rks <https://twitter.com/squ4rks>`_.
 
 Credits
 -------
