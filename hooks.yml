@@ -1,12 +1,9 @@
 ---
 # Sample file to show you how hooks look like
 hooks:
-  - name: test hook
+  {% for url in urls %}
+  - name: test hook {{ hostname }}
     resource: messages
     event: created
-    target_url: https://www.cisco.com
-
-  - name: test hook 2
-    resource: messages
-    event: created
-    target_url: https://www.google.com
+    target_url: {{ url }}/webhook
+  {% endfor %}
